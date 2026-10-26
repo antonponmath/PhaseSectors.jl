@@ -82,14 +82,20 @@ boundary(Φ::PhaseSector) = (Φ.α, Φ.β)
 function unwrap(Φ::AbstractVector{PhaseSector})
     Φun = copy(Φ)
     mask = (Φ .≠ 𝕋)
-    Φun[mask] .= accumulate((prev, cur) -> cur - _div2pi(cur.α - prev.α), Φ[mask])
+    Φun[mask] .= accumulate(
+        (prev, cur) -> cur - _div2pi(cur.α - prev.α),
+        Φ[mask]
+    )
     return Φun
 end
 
 
 function Base.join(Φ::AbstractVector{PhaseSector})
     Φun = unwrap(Φ)
-    return PhaseSector(minimum(getproperty.(Φun, :α)), maximum(getproperty.(Φun, :β)))
+    return PhaseSector(
+        minimum(getproperty.(Φun, :α)),
+        maximum(getproperty.(Φun, :β))
+    )
 end
 
 
