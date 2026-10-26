@@ -93,7 +93,8 @@ function Base.join(Φ::AbstractVector{PhaseSector})
 end
 
 
-Base.join(Φ1::PhaseSector, Φ2::PhaseSector) = join([Φ1, Φ2])
+Base.join(Φ1::PhaseSector, Φ2::PhaseSector, etc::PhaseSector...) =
+    join(PhaseSector[Φ1, Φ2, etc...])
 
 
 dilate(Φ::AbstractVector{PhaseSector}) = [
