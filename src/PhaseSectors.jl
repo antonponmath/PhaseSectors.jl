@@ -38,8 +38,9 @@ Base.show(io::IO, Φ::PhaseSector) =
 
 
 Base.print(io::IO, Φ::PhaseSector) = begin
+    Φ ≡ 𝕋 && print(io, "𝕋")
     Φ = Φ - _div2pi((Φ.α + Φ.β) / 2)
-    print(io, Φ ≡ 𝕋 ? "𝕋" : "arc[$(Φ.α / π)π, $(Φ.β / π)π]")
+    print(io, "arc[$(Φ.α / π)π, $(Φ.β / π)π]")
 end
 
 
