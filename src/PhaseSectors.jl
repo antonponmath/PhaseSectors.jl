@@ -1,6 +1,6 @@
 module PhaseSectors
 
-export PhaseSector, 𝕋, dist, boundary, unwrap, join, dilate
+export PhaseSector, 𝕋, dist, boundary, unwrap, dilate
 
 
 include("helpers.jl")
@@ -87,13 +87,13 @@ function unwrap(Φ::AbstractVector{PhaseSector})
 end
 
 
-function join(Φ::AbstractVector{PhaseSector})
+function Base.join(Φ::AbstractVector{PhaseSector})
     Φun = unwrap(Φ)
     return PhaseSector(minimum(getproperty.(Φun, :α)), maximum(getproperty.(Φun, :β)))
 end
 
 
-join(Φ1::PhaseSector, Φ2::PhaseSector) = join([Φ1, Φ2])
+Base.join(Φ1::PhaseSector, Φ2::PhaseSector) = join([Φ1, Φ2])
 
 
 dilate(Φ::AbstractVector{PhaseSector}) = [
