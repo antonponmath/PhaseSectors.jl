@@ -1,6 +1,6 @@
 module PhaseSectors
 
-export PhaseSector, 𝕋, dist, boundary, unwrap, dilate
+export PhaseSector, 𝕋, dist, unwrap, dilate
 
 
 include("helpers.jl")
@@ -78,9 +78,6 @@ function dist(Φ1::PhaseSector, Φ2::PhaseSector)
         )
     )
 end
-
-
-boundary(Φ::PhaseSector) = (Φ.α, Φ.β)
 
 
 function unwrap(Φ::AbstractVector{PhaseSector})
