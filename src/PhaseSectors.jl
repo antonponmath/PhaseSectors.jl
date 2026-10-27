@@ -2,9 +2,8 @@ module PhaseSectors
 
 export PhaseSector, 𝕋, dist, unwrap, dilate, sectors!
 
-
 include("helpers.jl")
-include("plotting.jl")
+
 
 struct PhaseSector
     α::Real
@@ -21,7 +20,7 @@ struct PhaseSector
 end
 
 
-𝕋 = PhaseSector(-Inf, Inf)
+const 𝕋 = PhaseSector(-Inf, Inf)
 
 
 PhaseSector(αβ::Tuple{<:Real, <:Real}) = PhaseSector(αβ...)
@@ -108,5 +107,7 @@ Base.join(Φ1::PhaseSector, Φ2::PhaseSector, etc::PhaseSector...) =
 dilate(Φ::AbstractVector{PhaseSector}) = [
     join(@view Φ[((i - 1):(i + 1)) ∩ eachindex(Φ)]) for i in eachindex(Φ)
 ]
+
+include("plotting.jl")
 
 end # module PhaseSectors
