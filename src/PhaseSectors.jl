@@ -2,7 +2,11 @@ module PhaseSectors
 
 export PhaseSector, 𝕋, dist, unwrap, dilate, sectors!
 
-include("helpers.jl")
+
+_div2pi(θ::Real) = θ - rem2pi(θ, RoundNearest)
+
+_unwrap(θ::AbstractVector{<:Real}) =
+    accumulate((prev, cur) -> cur - _div2pi(cur - prev), θ)
 
 
 struct PhaseSector
@@ -25,7 +29,6 @@ const 𝕋 = PhaseSector(-Inf, Inf)
 
 PhaseSector(αβ::Tuple{<:Real, <:Real}) = PhaseSector(αβ...)
 
-
 PhaseSector(z::AbstractVector{<:Number}) =
     z .|> angle |> _unwrap |> extrema |> PhaseSector
 
@@ -35,7 +38,6 @@ Base.broadcastable(Φ::PhaseSector) = Ref(Φ)
 
 Base.show(io::IO, Φ::PhaseSector) =
     print(io, "PhaseSector($(Φ.α), $(Φ.β))")
-
 
 Base.print(io::IO, Φ::PhaseSector) = begin
     if Φ ≡ 𝕋
@@ -66,7 +68,6 @@ function dist(θ::Number, Φ::PhaseSector)
     θ ∈ Φ && return 0
     return min(mod2pi(Φ.α - θ), mod2pi(θ - Φ.β))
 end
-
 
 function dist(Φ1::PhaseSector, Φ2::PhaseSector)
     (Φ1 ≡ 𝕋 || Φ2 ≡ 𝕋) && return 0
@@ -99,7 +100,6 @@ function Base.join(Φ::AbstractVector{PhaseSector})
     )
 end
 
-
 Base.join(Φ1::PhaseSector, Φ2::PhaseSector, etc::PhaseSector...) =
     join(PhaseSector[Φ1, Φ2, etc...])
 
@@ -108,6 +108,6 @@ dilate(Φ::AbstractVector{PhaseSector}) = [
     join(@view Φ[((i - 1):(i + 1)) ∩ eachindex(Φ)]) for i in eachindex(Φ)
 ]
 
-include("plotting.jl")
+function sectors! end
 
 end # module PhaseSectors

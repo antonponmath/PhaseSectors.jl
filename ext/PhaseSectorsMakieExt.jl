@@ -1,3 +1,7 @@
+module PhaseSectorsMakieExt
+
+using PhaseSectors
+
 using Makie: Axis, lines!, band!, translate!
 
 
@@ -7,7 +11,7 @@ _drawable(Φ::AbstractVector{PhaseSector}) = accumulate(
     Φ; init = (0, 2π)
 )
 
-function sectors!(
+function PhaseSectors.sectors!(
         ax::Axis, ω::AbstractVector{<:Real}, Φ::AbstractVector{PhaseSector};
         linecolor = :black, fillcolor = (:black, 0.2)
     )
@@ -32,3 +36,5 @@ function sectors!(
     end
     return
 end
+
+end # module PhaseSectorsMakieExt

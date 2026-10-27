@@ -3,8 +3,11 @@ uuid = "f9c7c7d5-39dd-4236-92f6-66d0328180c7"
 version = "0.1.0"
 authors = ["antonponmath <48967349+antonponmath@users.noreply.github.com>"]
 
-[deps]
+[weakdeps]
 Makie = "ee78f7c6-11fb-53f2-987a-cfe4a2b5a57a"
+
+[extensions]
+PhaseSectorsMakieExt = "Makie"
 
 [compat]
 Makie = "0.24.16"
