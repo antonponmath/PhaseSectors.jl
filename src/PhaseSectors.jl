@@ -1,9 +1,10 @@
 module PhaseSectors
 
-export PhaseSector, 𝕋, dist, unwrap, dilate
+export PhaseSector, 𝕋, dist, unwrap, dilate, sectors!
 
 
 include("helpers.jl")
+include("plotting.jl")
 
 struct PhaseSector
     α::Real
