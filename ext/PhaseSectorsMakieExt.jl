@@ -7,16 +7,16 @@ using Makie: Axis, Colorant, lines!, band!, translate!
 include("helpers.jl")
 
 """
-    sectors!(ax::Axis, ω::AbstractVector{<:Real}, Φ::AbstractVector{PhaseSector};
-        linecolor::Colorant = :black, fillcolor::Colorant = (:black, 0.2))
+    sectors!(ax::Makie.Axis, ω::AbstractVector{<:Real}, Φ::AbstractVector{PhaseSector};
+        linecolor = :black, fillcolor = (:black, 0.2))
 
-Plot a vector `Φ` of phase sectors agains a vector `ω` on Makie axis `ax`. The phase
-sectors are unwrapped, and the plot is repeated with 2π shifts, so the vertical axis
-can be cropped to [-π, π].
+Plot a vector of phase sectors agains `ω` on axis `ax`. The phase sectors are unwrapped
+internally, and the plot is repeated with 2π shifts, so the vertical axis can be cropped
+to [-π, π].
 """
 function PhaseSectors.sectors!(
         ax::Axis, ω::AbstractVector{<:Real}, Φ::AbstractVector{PhaseSector};
-        linecolor::Colorant = :black, fillcolor::Colorant = (:black, 0.2)
+        linecolor = :black, fillcolor = (:black, 0.2)
     )
     Φun = unwrap(Φ)
     αun, βun = [getproperty.(Φun, i) for i in (:α, :β)]
