@@ -2,18 +2,21 @@ module PhaseSectorsMakieExt
 
 using PhaseSectors
 
-using Makie: Axis, lines!, band!, translate!
+using Makie: Axis, Colorant, lines!, band!, translate!
 
+include("helpers.jl")
 
-_drawable(Φ::AbstractVector{PhaseSector}) = accumulate(
-    (prev, cur) ->
-    cur ≡ 𝕋 ? (prev[1], prev[1] + 2π) : (cur.α, cur.β),
-    Φ; init = (0, 2π)
-)
+"""
+    sectors!(ax::Axis, ω::AbstractVector{<:Real}, Φ::AbstractVector{PhaseSector};
+        linecolor::Colorant = :black, fillcolor::Colorant = (:black, 0.2))
 
+Plot a vector `Φ` of phase sectors agains a vector `ω` on Makie axis `ax`. The phase
+sectors are unwrapped, and the plot is repeated with 2π shifts, so the vertical axis
+can be cropped to [-π, π].
+"""
 function PhaseSectors.sectors!(
         ax::Axis, ω::AbstractVector{<:Real}, Φ::AbstractVector{PhaseSector};
-        linecolor = :black, fillcolor = (:black, 0.2)
+        linecolor::Colorant = :black, fillcolor::Colorant = (:black, 0.2)
     )
     Φun = unwrap(Φ)
     αun, βun = [getproperty.(Φun, i) for i in (:α, :β)]
@@ -34,7 +37,7 @@ function PhaseSectors.sectors!(
         end
         translate!.(p, 0, shift, 0)
     end
-    return
+    return nothing
 end
 
 end # module PhaseSectorsMakieExt
