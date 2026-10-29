@@ -16,14 +16,12 @@ Construct the phase sector spanned by a set of complex numbers.
 struct PhaseSector
     α::Real
     β::Real
-    a::Real # ≡ α
-    b::Real # ≡ β
     function PhaseSector(α::Real, β::Real)
         α ≤ β || throw(ArgumentError("phase bounds must be ordered, got ($α, $β)"))
         if β ≥ α + π
             α, β = -Inf, Inf
         end
-        return new(α, β, α, β)
+        return new(α, β)
     end
 end
 
@@ -56,6 +54,12 @@ Base.print(io::IO, Φ::PhaseSector) = begin
         print(io, "arc[$(Φ.α / π)π, $(Φ.β / π)π]")
     end
 end
+
+
+"Defining aliases a and b for α and β."
+Base.getproperty(Φ::PhaseSector, name::Symbol) =
+    name ≡ a ? getfield(Φ, :α) :
+    name ≡ b ? getfield(Φ, :β) : getfield(Φ, name)
 
 
 Base.:-(Φ::PhaseSector) = PhaseSector(-Φ.β, -Φ.α)
