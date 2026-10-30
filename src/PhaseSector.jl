@@ -51,10 +51,6 @@ const 𝕋 = PhaseSector(-Inf, Inf)
 Base.broadcastable(Φ::PhaseSector) = Ref(Φ)
 
 
-Base.show(io::IO, Φ::PhaseSector) =
-    print(io, "PhaseSector{$(typeof(Φ.α))}($(Φ.α), $(Φ.β))")
-
-
 Base.print(io::IO, Φ::PhaseSector) = begin
     if Φ ≡ 𝕋
         print(io, "𝕋")
