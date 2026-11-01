@@ -15,7 +15,7 @@ internally, and the plot is repeated with 2π shifts, so the vertical axis can b
 to [-π, π].
 """
 function PhaseSectors.sectors!(
-        ax::Axis, ω::AbstractVector{<:Real}, Φ::AbstractVector{PhaseSector};
+        ax::Axis, ω::AbstractVector{<:Real}, Φ::AbstractVector{<:PhaseSector};
         linecolor = :black, fillcolor = (:black, 0.2)
     )
     Φun = unwrap(Φ)
