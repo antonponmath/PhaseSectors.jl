@@ -34,7 +34,7 @@ end
 Unwrap a sequence of phase sectors similarly to unwrapping angles. Ignores infinite
 sectors.
 """
-function unwrap(Φ::AbstractVector{PhaseSector})
+function unwrap(Φ::AbstractVector{<:PhaseSector})
     Φun = copy(Φ)
     mask = (Φ .≠ 𝕋)
     Φun[mask] .= accumulate(
@@ -51,7 +51,7 @@ end
 
 The join of phase sectors (convex hull of their union).
 """
-function Base.join(Φ::AbstractVector{PhaseSector})
+function Base.join(Φ::AbstractVector{<:PhaseSector})
     Φun = unwrap(Φ)
     return PhaseSector(
         minimum(getproperty.(Φun, :α)),
@@ -69,6 +69,6 @@ Base.join(Φ1::PhaseSector, Φ2::PhaseSector, etc::PhaseSector...) =
 Join each phase sector with its neighbors. Helps detecting zero crossings when the
 sectors are thin and the zero can slip between them.
 """
-dilate(Φ::AbstractVector{PhaseSector}) = [
+dilate(Φ::AbstractVector{<:PhaseSector}) = [
     join(@view Φ[((i - 1):(i + 1)) ∩ eachindex(Φ)]) for i in eachindex(Φ)
 ]
