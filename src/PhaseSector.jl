@@ -19,6 +19,7 @@ struct PhaseSector{T <: Real}
         α ≤ β || throw(ArgumentError("phase bounds must be ordered, got ($α, $β)"))
         if β ≥ α + π
             α, β = -Inf, Inf
+            return new{Float64}(α, β)
         end
         return new(α, β)
     end
