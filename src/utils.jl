@@ -8,10 +8,10 @@ diam(Φ::PhaseSector) =
 
 
 """
-    dist(θ::Real, Φ::PhaseSector)
-    dist(Φ::PhaseSector, θ::Real)
+    dist(θ, Φ)
+    dist(Φ, θ)
 
-Distance from an angle to a phase sector in radians.
+Return the distance from angle `θ` to phase sector `Φ`.
 """
 function dist(θ::Real, Φ::PhaseSector)
     θ ∈ Φ && return 0
@@ -21,9 +21,9 @@ end
 dist(Φ::PhaseSector, θ::Real) = dist(θ, Φ)
 
 """
-    dist(Φ1::PhaseSector, Φ2::PhaseSector)
+    dist(Φ1, Φ2)
 
-Distance between two phase sectors in radians.
+Return the distance between phase sectors `Φ1` and `Φ2`.
 """
 function dist(Φ1::PhaseSector, Φ2::PhaseSector)
     (Φ1 ≡ 𝕋 || Φ2 ≡ 𝕋) && return 0
@@ -40,8 +40,8 @@ end
 """
     unwrap(Φ)
 
-Unwrap a sequence of phase sectors similarly to unwrapping angles. Ignores infinite
-sectors.
+Unwrap and return the vector `Φ` of phase sectors. Works similarly to unwrapping angles.
+Ignores infinite sectors.
 """
 function unwrap(Φ::AbstractVector{<:PhaseSector})
     Φun = copy(Φ)
@@ -55,10 +55,9 @@ end
 
 
 """
-    join(Φ::AbstractVector{PhaseSector})
-    join(Φ1::PhaseSector, Φ2::PhaseSector, etc::PhaseSector...)
+    join(Φ)
 
-The join of phase sectors (convex hull of their union).
+Return the join of phase sectors contained in vector `Φ`.
 """
 function Base.join(Φ::AbstractVector{<:PhaseSector})
     Φun = unwrap(Φ)
@@ -68,15 +67,19 @@ function Base.join(Φ::AbstractVector{<:PhaseSector})
     )
 end
 
+"""
+    join(Φ1, Φ2[, ...])
+
+Return the join of phase sectors `Φ1`, `Φ2`, ...
+"""
 Base.join(Φ1::PhaseSector, Φ2::PhaseSector, etc::PhaseSector...) =
     join(PhaseSector[Φ1, Φ2, etc...])
 
 
 """
-    dilate(Φ::AbstractVector{PhaseSector})
+    dilate(Φ)
 
-Join each phase sector with its neighbors. Helps detecting zero crossings when the
-sectors are thin and the zero can slip between them.
+Join each phase sector in vector `Φ` with its immediate neighbors and return the result.
 """
 dilate(Φ::AbstractVector{<:PhaseSector}) = [
     join(@view Φ[((i - 1):(i + 1)) ∩ eachindex(Φ)]) for i in eachindex(Φ)

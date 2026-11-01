@@ -3,13 +3,12 @@
 
 Phase sector described by its endpoint angles `α` and `β` or, equivalently, `a` and `b`.
 
-    PhaseSector{T}(α::Real, β::Real) where {T <: Real}
-    PhaseSector(α::Real, β::Real)
-    PhaseSector(αβ::Tuple{<:Real, <:Real})
+    PhaseSector{<:Real}(α, β)
+    PhaseSector(α, β)
+    PhaseSector(αβ::Tuple)
 
-Construct the phase sector from its endpoint angles `α` and `β ≥ α`, or their tuple
-`αβ`. If `β ≥ α + π`, the sector becomes infinite (the entire 2π circle, denoted `𝕋`).
-
+Return the phase sector with endpoint angles `α` and `β ≥ α`. If `β ≥ α + π`, the sector
+becomes infinite (the entire 2π circle, denoted `𝕋`).
 """
 struct PhaseSector{T <: Real}
     α::T
@@ -33,9 +32,9 @@ PhaseSector(αβ::Tuple{<:Real, <:Real}) = PhaseSector(αβ...)
 
 
 """
-    PhaseSector(z::AbstractVector{<:Number})
+    PhaseSector(z)
 
-Construct the phase sector spanned by a set of complex numbers.
+Return the phase sector spanned by set `z` of complex numbers.
 """
 PhaseSector(z::AbstractVector{<:Number}) =
     z .|> angle |> _unwrap |> extrema |> PhaseSector
