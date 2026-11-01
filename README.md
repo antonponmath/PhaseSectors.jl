@@ -29,7 +29,7 @@ Set $\Theta \subseteq \mathbb{T}$ is called **convex** if every pair of its poin
 
 ## What Is Implemented
 
-Create the phase sector $\Phi = \mathrm{arc}\,[\alpha, \beta]$:
+Create the phase sector $\Phi = \mathrm{arc}[\alpha, \beta]$:
 ```julia
 Φ = PhaseSector(α, β)
 ```
