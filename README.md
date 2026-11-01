@@ -43,6 +43,7 @@ Endpoints `Φ.α` and `Φ.β` can be also accessed as `Φ.a` and `Φ.b`.
 **Operations:**
 - Check if a phase is inside the sector: `θ ∈ Φ`.
 - Minkowski sum of phase sectors, etc.: `Φ1 + Φ2`, `Φ + θ`, `Φ1 - Φ2`, ...
+- Diameter of a phase sector: `diam(Φ)`.
 - Distance between a phase and a sector, or between sectors: `dist(θ, Φ)`, `dist(Φ1, Φ2)`.
 - Unwrap a sequence of phase sectors similarly to `unwrap` for angles but ignoring entire $\mathbb{T}$-sectors: `unwrap(Φ)`. Useful for plotting.
 - Join (convex hull of the union) of sectors: `join([Φ1, Φ2, ...])` or `join(Φ1, Φ2, ...)`.
