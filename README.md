@@ -1,41 +1,35 @@
 # PhaseSectors.jl
 
-Operations with phase sectors as defined in [1]. Intended for the small-phase analysis of control systems.
+Operations with phase sectors as defined in [[1]](#1). Intended for the small-phase analysis of control systems.
 
 ## Definitions
 
 **Phases** are elements of the space $\mathbb{T} = \mathbb{R}/(2\pi\mathbb{Z})$. Phase $\theta \in \mathbb{T}$ is therefore an equivalence class. Notation $\theta = [x]$ means that $x \in \mathbb{R}$ is a representative of that class.
 
 **Phase arc** covered by an interval $[x_1, x_2] \subset \mathbb{R}$ is
-$$
-\operatorname{arc}[x_1, x_2] = \bigl\{
-    [x] \colon x \in [x_1, x_2]
-\bigr\}.
-$$
+```math
+\mathrm{arc}[x_1, x_2] = \bigl\{ [x] \colon x \in [x_1, x_2] \bigr\}.
+```
 
 **Metric** on $\mathbb{T}$ is
-$$
-\operatorname{dist}(\theta_1, \theta_2) = \min\bigl\{
-    |x_1 - x_2| \colon [x_1] = \theta_1, [x_2] = \theta_2
-\bigr\}.
-$$
+```math
+\mathrm{dist}(\theta_1, \theta_2) = \min\bigl\{ |x_1 - x_2| \colon [x_1] = \theta_1, [x_2] = \theta_2 \bigr\}.
+```
 
 The **diameter** of a set $\Theta \subseteq \mathbb{T}$ is
-$$
-\operatorname{diam}\Theta = \sup\bigl\{
-    \operatorname{dist}(\theta_1, \theta_2) \colon \theta_1, \theta_2 \in \Theta
-\bigr\}.
-$$
+```math
+\mathrm{diam}\,\Theta = \sup\bigl\{ \mathrm{dist}(\theta_1, \theta_2) \colon \theta_1, \theta_2 \in \Theta \bigr\}.
+```
 
 Set $\Theta \subseteq \mathbb{T}$ is called **convex** if every pair of its points can be connected by a minimizing $\mathbb{T}$-geodesic contained in $\Theta$.
 
 **Phase sector** $\Phi$ is a convex phase arc: that is,
 - either the entire circle: $\Phi = \mathbb{T}$,
-- or a phase arc with $\operatorname{diam}\Phi < \pi$.
+- or a phase arc with $\mathrm{diam}\,\Phi < \pi$.
 
 ## What Is Implemented
 
-Create the phase sector $\Phi = \operatorname{arc}[\alpha, \beta]$:
+Create the phase sector $\Phi = \mathrm{arc}\,[\alpha, \beta]$:
 ```julia
 Φ = PhaseSector(α, β)
 ```
@@ -57,4 +51,4 @@ Endpoints `Φ.α` and `Φ.β` can be also accessed as `Φ.a` and `Φ.b`.
 
 ---
 
-[1] A. Ponomarev. *Compositional small-gain and small-phase stability analysis*. 2006. [arXiv:2606.14745](https://arxiv.org/abs/2606.14745).
+<a id="1">[1]</a> A. Ponomarev. *Compositional small-gain and small-phase stability analysis*. 2006. [arXiv:2606.14745](https://arxiv.org/abs/2606.14745).
