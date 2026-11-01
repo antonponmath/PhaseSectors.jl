@@ -1,4 +1,13 @@
 """
+    diam(Φ)
+
+Return the diameter of phase sector Φ.
+"""
+diam(Φ::PhaseSector) =
+    return Φ ≡ 𝕋 ? π : Φ.β - Φ.α
+
+
+"""
     dist(θ::Real, Φ::PhaseSector)
     dist(Φ::PhaseSector, θ::Real)
 

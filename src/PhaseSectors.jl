@@ -1,6 +1,6 @@
 module PhaseSectors
 
-export PhaseSector, 𝕋, dist, unwrap, dilate, sectors!
+export PhaseSector, 𝕋, diam, dist, unwrap, dilate, sectors!
 
 include("PhaseSector.jl")
 
