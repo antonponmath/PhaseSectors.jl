@@ -18,14 +18,14 @@ Operations with phase sectors as defined in [[1]](#1). Intended for the small-ph
 
 The **diameter** of a set $\Theta \subseteq \mathbb{T}$ is
 ```math
-\mathrm{diam}\,\Theta = \sup\bigl\{ \mathrm{dist}(\theta_1, \theta_2) \colon \theta_1, \theta_2 \in \Theta \bigr\}.
+\mathrm{diam}\Theta = \sup\bigl\{ \mathrm{dist}(\theta_1, \theta_2) \colon \theta_1, \theta_2 \in \Theta \bigr\}.
 ```
 
 Set $\Theta \subseteq \mathbb{T}$ is called **convex** if every pair of its points can be connected by a minimizing $\mathbb{T}$-geodesic contained in $\Theta$.
 
 **Phase sector** $\Phi$ is a convex phase arc: that is,
 - either the entire circle: $\Phi = \mathbb{T}$,
-- or a phase arc with $\mathrm{diam}\,\Phi < \pi$.
+- or a phase arc with $\mathrm{diam}\Phi < \pi$.
 
 ## What Is Implemented
 
